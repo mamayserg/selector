@@ -1,42 +1,40 @@
 <template>
   <div class="box">
      <div class="textBank">
-       <p>BANK DEPOSIT</p>
+       <p>BANK DEPOSIT{{test}}</p>
      </div>
     <div class="form-pay-system">
 
         <div class="box-select">
           <p>COUNTRY</p>
          <select class="box-selection" v-model="selected.country">
-          <option  v-for="country in countries" v-bind:value="country.id">
+          <option  v-for="country in countries" v-bind:value="country.name">
             {{ country.name }}
           </option>
          </select>
-         <span>Выбрано: {{selected.country}}</span>
+
         </div>
         <template v-if="selected.country!=''">
         <div class="box-select" >
           <p>SELECT PAY SYSTEM</p>
           <select class="box-selection"   v-model="selected.system">
-            <option  v-for="system in paySystem" v-bind:value="system.id"  >
+            <option  v-for="system in paySystem" v-bind:value="system.systemCurrency" >
                 <p>{{system .name }}</p>
             </option>
           </select>
-          <span>Выбрано: {{selected.system}}</span>
+
         </div>
         </template>
-
-<!--<template></template>-->
 
         <template v-if="selected.system!=''">
         <div class="box-select"  >
           <p>AVAILABLE CURRENCIES FOR THIS COUNTRY</p>
-          <select class="box-selection"    v-model="selected.currency">
-            <option v-for="system in paySystem" v-bind:value="system.id" >
+          <select class="box-selection"    v-model="selected.currency" >
+            <option v-for="system in selected.system" v-bind:value="system.iso"   >
               {{system.id}}
             </option>
           </select>
-          <span>Выбрано: {{selected.currency}}</span>
+
         </div>
         </template>
         <form >
@@ -65,9 +63,12 @@
 </template>
 <script>
   export  default {
-
+props:{
+    test:''
+},
       data(){
           return{
+
               selected:{
                   country: '',
                   system: '',
@@ -114,26 +115,46 @@
            {id: "BN", name: "Brunei Darussalam", default_currency: null}
 
       ],
-              paySystem:[{id: "CashU", name: "CashU",currency:
+              paySystem:[{id: "CashU", name: "CashU",systemCurrency:
                                                      [{id: "AED", iso: "AED"},
                                                      {id: "AFN", iso: "AFN"},
                                                      {id: "ALL", iso: "ALL"}
                                                      ]
                          },
                          {id: "Worldremit", name: "Worldremit",
-                             currency:[{id: "AED", iso: "AED"},
-                                      {id: "AFN", iso: "AFN"},
-                                      {id: "ALL", iso: "ALL"}
+                             systemCurrency:[{id: "ED", iso: "ED"},
+                                      {id: "UA", iso: "UA"},
+                                      {id: "ALL", iso: "ALL"},
+                                      {id: "ARS", iso: "ARS"},
+                                      {id: "AUD", iso: "AUD"},
+                                      {id: "AWG", iso: "AWG"},
+                                      {id: "AZN", iso: "AZN"}
 
-                                      ]
+
+                             ]
                          },
 
 
-                         {id: "Moneygram", name: "Moneygram"}]
+                         {id: "Moneygram", name: "Moneygram",
+                             systemCurrency:[
+                                             {id: "BDT", iso: "BDT"},
+                                             {id: "BGN", iso: "BGN"},
+                                             {id: "BHD", iso: "BHD"},
+                                             {id: "BIF", iso: "BIF"},
+                                             {id: "BMD", iso: "BMD"},
+                                             {id: "BND", iso: "BND"}
+
+
+      ]
+                         }
+                         ]
 
       }
       },
       methods:{
+          add(item){
+              console.log(item,"log");
+          },
           saveSelect() {
               console.log(this.selected,"item");
 
