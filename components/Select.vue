@@ -12,7 +12,7 @@
             {{ country.name }}
           </option>
          </select>
-
+         <span>Выбрано: {{selected.country}}</span>
         </div>
         <template v-if="selected.country!=''">
         <div class="box-select" >
@@ -22,7 +22,7 @@
                 <p>{{system .name }}</p>
             </option>
           </select>
-
+          <span>Выбрано: {{selected.system}}</span>
         </div>
         </template>
 
@@ -34,7 +34,7 @@
               {{system.id}}
             </option>
           </select>
-
+          <span>Выбрано: {{selected.currency}}</span>
         </div>
         </template>
         <form >
