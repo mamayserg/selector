@@ -1,17 +1,20 @@
 <template>
   <div class="container">
     <div>
-     <Selector></Selector>
+        <Balances></Balances>
+     <!--<Selector></Selector>-->
     </div>
   </div>
 </template>
 
 <script>
 import Selector from '~/components/Select.vue'
+import Balances from '../components/Balances'
 
 export default {
   components: {
-      Selector
+      Selector,
+      Balances
   }
 }
 </script>

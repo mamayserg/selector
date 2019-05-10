@@ -1,4 +1,5 @@
 import pkg from './package'
+import webpack from 'webpack'
 
 export default {
   mode: 'universal',
@@ -33,6 +34,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+
   ],
 
   /*
@@ -45,6 +47,13 @@ export default {
   ** Build configuration
   */
   build: {
+      plugins: [
+          new webpack.ProvidePlugin({
+              '$': 'jquery',
+              '_': 'lodash'
+              // ...etc.
+          })
+      ],
     /*
     ** You can extend webpack config here
     */
