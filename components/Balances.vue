@@ -20,7 +20,7 @@
 
                 </tr>
                 <tr v-for=" balance in orderedUsers " v-bind:key="balance.id">
-                    <th ><img src="../assets/img/BNB.png"  /> {{balance.name}}</th>
+                    <th ><img id="img-curr" v-bind:src="balance.img"  /> {{balance.name}}</th>
                     <th>{{balance.balance}}</th>
                     <th>{{balance.balance_available}}</th>
 
@@ -33,10 +33,11 @@
     </div>
 </template>
 <script>
+    import img from '../assets/img/DASH.png'
     export default {
         data(){
             return{
-                in:'BNB.png',
+              im:'~/assets/img/BTC.png',
                 sorts:[{name:'name', desc:'desc',asc:'asc',buttonName:''},
                     {name:'balance', desc:'desc',asc:'asc',buttonName:'ALL'},
                     {name:'balance_available', desc:'desc',asc:'asc',buttonName:'AVAILABLE'}],
@@ -45,11 +46,12 @@
             }
         },
         computed:{
+
             orderedUsers () {
                 return _.orderBy(this.$store.state.balances, this.orderBy,this.orderId)
             },
           myBalance(){
-              return this.$store.state.balances
+              return img
           }
 
         },
@@ -60,9 +62,6 @@
 
                 console.log(order,by);
             },
-          ball(){
-              console.log(this.$store.state.balances);
-          }
         }
     }
 </script>
@@ -79,7 +78,10 @@
         margin-left: 15px;
         color: white;
     }
-
+    #img-curr{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
     #button-name{
         padding-top: 16px;
         padding-left: 6px;
